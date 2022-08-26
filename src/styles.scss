@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+@font-face {
+    font-family: 'YouTube Sans';
+    src: url(/assets/fonts/YouTubeSansDarkMedium.otf) format('opentype');
+}
+
+:root {
+    --border-radius: 4px;
+    --body-background-color: #fff;
+    --search-bar-border: #808080;
+    --search-bar-background: #d3d3d3;
+    --light-gray: #a7a7a7;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    background-color: var(--body-background-color);
+    font-family: Roboto, sans-serif;
+    margin: 0;
+}
+
+.p-virtualscroller-list.p-scroller {
+    overflow-x: hidden;
+}

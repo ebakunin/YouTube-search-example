@@ -1,0 +1,61 @@
+<header>
+    <div id="header">
+        <img alt="YouTube logo" src="/assets/images/youtube-logo.svg">
+        <span>Search Example</span>
+    </div>
+</header>
+
+<section>
+    <form [formGroup]="form" id="searchBox">
+        <input formControlName="searchTerm"
+               type="text"
+               id="searchTerm"
+               maxlength="50"
+               placeholder="Search"
+               required
+               autocomplete="off"
+               aria-label="Search">
+        <img alt="" src="/assets/images/search-icon.svg">
+        <span *ngIf="!!form.get('searchTerm')!.value" title="Clear search" id="clearSearch" (click)="clearForm()"></span>
+
+        <span id="sortOptions">
+            Sort by
+            <select formControlName="sort">
+                <option *ngFor="let option of searchOrderOptions">{{ option }}</option>
+            </select>
+        </span>
+    </form>
+</section>
+
+<hr>
+
+<section>
+    <ng-container *ngIf="form.get('searchTerm')!.value!.length > 1">
+        <div class="result-notifications" *ngIf="isLoading$ | async; else noResults">
+            <loading-symbol></loading-symbol>
+        </div>
+
+        <ng-template #noResults>
+            <div class="result-notifications" *ngIf="(totalResults$ | async) === 0">No Results</div>
+        </ng-template>
+    </ng-container>
+
+    <p-virtualScroller
+        id="videoResults"
+        [value]="videoData"
+        [itemSize]="190"
+        scrollHeight="72vh"
+        [lazy]="true"
+        (onLazyLoad)="onLazyLoad($event)"
+    >
+        <ng-template let-video pTemplate="item">
+            <video-card [video]="video"></video-card>
+        </ng-template>
+    </p-virtualScroller>
+</section>
+
+<footer>
+    <div id="footer">
+        © {{ copyrightYear }} <a href="https://ericchristenson.com" target="_blank">Eric Christenson</a>
+    </div>
+</footer>
