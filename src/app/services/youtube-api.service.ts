@@ -8,7 +8,7 @@ import {
     YouTubeSearchResource,
     YouTubeApiResponse,
     YouTubeVideoResource, MAX_RESULT_LENGTH
-} from '../interfaces/youtube-search.response';
+} from '../youtube-schema/youtube-schema';
 
 export enum ESearchOrderOptions {
     date = 'date',

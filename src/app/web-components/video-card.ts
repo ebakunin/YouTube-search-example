@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
-import { VideoData } from '../interfaces/youtube-search.response';
+import { VideoData } from '../youtube-schema/youtube-schema';
 
 @customElement('video-card')
 export class CardUser extends LitElement {

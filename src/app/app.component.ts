@@ -4,7 +4,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { LazyLoadEvent } from 'primeng/api';
 import {
     BehaviorSubject,
-    debounceTime, delay,
+    debounceTime,
     distinctUntilChanged,
     EMPTY,
     filter,
@@ -16,8 +16,8 @@ import {
     takeUntil
 } from 'rxjs';
 
-import { ESearchOrderOptions, YouTubeApiService } from './core/youtube-api.service';
-import { MAX_RESULT_LENGTH, VideoData, YouTubeSearchResource } from './interfaces/youtube-search.response';
+import { ESearchOrderOptions, YouTubeApiService } from './services/youtube-api.service';
+import { MAX_RESULT_LENGTH, VideoData, YouTubeSearchResource } from './youtube-schema/youtube-schema';
 import './web-components/video-card';
 import './web-components/loading-symbol';
 
@@ -98,7 +98,6 @@ export class AppComponent implements OnDestroy, OnInit {
                    return of(term);
                }
            }),
-           delay(1000),
            takeUntil(this.#onDestroy$)
        ).subscribe(() => this.#keywordSearch());
 
@@ -137,7 +136,6 @@ export class AppComponent implements OnDestroy, OnInit {
             filter((videoIds) => videoIds.length > 0),
             switchMap((videoIds) => this._youtubeApiService.videoSearch$(videoIds)),
             map((videos) => videos.map(video => new VideoData(video))),
-            debounceTime(1000),
             take(1)
         ).subscribe({
             next: (data) => {

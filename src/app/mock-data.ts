@@ -4,7 +4,7 @@ import {
     YouTubeApiResponse,
     YouTubeSearchResource,
     YouTubeVideoResource
-} from './interfaces/youtube-search.response';
+} from './youtube-schema/youtube-schema';
 
 export const MOCK_THUMBNAIL = {
     height: 90,
